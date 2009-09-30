@@ -30,10 +30,10 @@ begin
     s.homepage    = "http://github.com/kojul/blackbook"
     s.description = "It does things. Like import contacts from EVERYWHERE."
     s.authors     = ["Rany Keddo", "Brian Cardarella"]
-    s.add_dependency = ('hpricot', '>= 0.7.0')
-    s.add_dependency = ('mechanize', '>= 0.7.0')
-    s.add_dependency = ('hoe', '>= 1.5.0')
-    s.add_dependency = ('fastercsv', '>= 1.2.0')
+    s.add_dependency('hpricot', '>= 0.7.0')
+    s.add_dependency('mechanize', '>= 0.7.0')
+    s.add_dependency('hoe', '>= 1.5.0')
+    s.add_dependency('fastercsv', '>= 1.2.0')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
