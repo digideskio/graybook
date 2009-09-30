@@ -73,7 +73,7 @@ class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
       unless clean_email.empty?
         columns = row/"td"
         { 
-          :name  => ( columns[1] / "b" / "a" ).inner_html, # name
+          :name  => ( columns[1] / "b" / "a" ).inner_html.strip, # name
           :email => clean_email
         } 
       end
