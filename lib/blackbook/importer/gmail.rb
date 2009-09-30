@@ -17,7 +17,7 @@ class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
     # GMail depends on Hpricot for some reason...
     parser = WWW::Mechanize.html_parser
     WWW::Mechanize.html_parser = Hpricot
-    returning super do
+    return super do
       WWW::Mechanize.html_parser = parser
     end
   end
