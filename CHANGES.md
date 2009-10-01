@@ -1,49 +1,129 @@
-== 1.0.20 / 2009-09-30
+==1.0.24
 
-* lots of changes undocumented here.
-* putting on gemcutter.
+ * Fixed Hotmail contact regexp to reflect new site.
+
+==1.0.22 / 2009-09-30
+
+ * GRAYBOOK WILL CONQUER.
+ * Renamed Greybook with aim of JSON and Rails integration.
+
+==1.0.21 / 2009-09-30
+
+ * Re-added gem dependencies... not sure why they're gone.
+ * Removes newline that comes before and after the name...
+
+== 1.0.19 / 2009-08-19
+
+ * better handling for empty strings when creating symbols for column names
+
+== 1.0.18 / 2009-08-18
+
+ * Strip out any '\0' characters when creating a Symbol string ojbect
+
+== 1.0.17 / 2009-06-23
+
+ * fixed broken gmail and aol
+ * fixed hotmail finally, credit goes to http://github.com/benalavi for the main fix, i just added in the check if presented with interstitial page
+
+== 1.0.15 / 2009-04-16
+
+ * remove enclosed quotation marks on csv import
+
+== 1.0.14 / 2009-03-31
+
+ * Now handles AOL Legacy accounts
+
+== 1.0.13 / 2009-03-10
+
+ * Removed the ruby-debug require line
+ * Added :pattern option for CSV for different CSV formats
+
+== 1.0.12 / 2009-03-10
+
+ * Cleaned up Rakefile
+
+== 1.0.11 / 2009-02-25
+
+ * add support for email addresses @yahoo.co.uk
+ * Test and fix issue where plus sign in yahoo csv email address blows up regex test
+ * Update to handle hotmail changes.
+
+== 1.0.10 / 2009-02-25
+
+ * Modified gmail importer to check cookie includes username, not equals it, to work for username or full email
+ * disabled hotmail from registry, basically they added captcha so must do live.com accounts through OAuth now...
+
+== 1.0.9 / 2009-02-19
+
+ * incorporated hotmail fixes from we-play
+ * Update Rakefile
+
+== 1.0.8 / 2009-02-19
+
+ * Updated for 'googlemail.com'
+ * merged conflicts
+
+== 1.0.7 / 2009-02-18
+
+ * Modified the tests... I think there is an issue with how the mocking is being done
+ * Update to handle hotmail changes.
+ * Converted to Jewler
+ * test not behaving same as production.  Getting strings instead of Nokogiri objects
+ * retry redirect a few times if its not working
+ * update gmail importer to handle case where initial request to contact page is a loading screen
+ * add names and emails as pairs.  Do not assume that the n-th name matches the n-th email
+ * changes for aol, hotmail, yahoo
+ * Added a View map row to fixture html for hotmail contact scrape and updated importer to not choke.
+ * Include Windows Live ID label in hotmail importer test
+ * Properly detect errors for Yahoo IDs that don't exist
+ * Changed a failing test so that result[:name] is nil for a hotmail contact with no name specified. Previous versions of blackbook set result[:name] to the contact's email address.
+ * assign :name to the value given by 'Name' or the empty string if not specified for hotmail contacts
+ * add Windows Live ID to the list of fields where an email address might be for hotmail contacts
+ * Add live.com as a supported domain for the hotmail provider
+ * Compatibility with Mechanize 0.9/Nokogiri
+ * fix hotmail import
+ * remove an unnecessary rspec requirement
 
 == 1.0.5 / 2008-11-26
 
-* moved to github
-* added patch for gmail. emails were coming in with notes. 
-* added german stuff to graybook gem
+ * moved to github
+ * added patch for gmail. emails were coming in with notes. 
+ * added german stuff to graybook gem
 
 == 1.0.4 / 2008-02-27
 
-* 1 minor enhancement
+ * 1 minor enhancement
   * fix 1.0.3 dud with AOL issues - Thank you Howard Wong!
 
 == 1.0.3 / 2008-02-27
 
-* 1 minor enhancement
+ * 1 minor enhancement
   * address the change in where AOL contacts are listed
 
 == 1.0.2 / 2008-02-20
 
-* 1 minor enhancement
+ * 1 minor enhancement
   * fixed sign on issue with GMail
 
 == 1.0.1 / 2008-02-08
 
-* 2 minor enhancement
+ * 2 minor enhancement
   * fix edge case sign on issue with GMail
 
 == 1.0.0 / 2008-01-30
 
-* 2 major enhancements
+ * 2 major enhancements
   * Birthday!
   * Mechanize patch for AOL sign-on! Thanks Mortee!
 
-* Importers
+ * Importers
   * AOL
   * GMail
   * Hotmail
   * Yahoo!
   * CSV
 
-* Exporters
+ * Exporters
   * Hash
   * XML
   * VCard
-
