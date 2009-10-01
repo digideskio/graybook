@@ -51,8 +51,7 @@ class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
     # Check for login success
     if page.body =~ /The e-mail address or password is incorrect/ ||
       page.body =~ /Sign in failed\./
-      raise( Graybook::BadCredentialsError, 
-        "That username and password was not accepted. Please check them and try again." )
+      return Problem.new("Username and password were not accepted. Please check them and try again.")
     end
     
     @first_page = agent.get( page.body.scan(/http\:\/\/[^"]+/).first )
@@ -68,12 +67,11 @@ class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
   ##
   # Scrape contacts for Hotmail
   # Seems like a POST to directly fetch CSV contacts from options.aspx?subsection=26&n=
-  # raises an end of file error in Net::HTTP via Mechanize.
   # Seems like Hotmail addresses are now hosted on Windows Live.
 
   def scrape_contacts
     unless agent.cookies.find{|c| c.name == 'MSPPre' && c.value == options[:username]}
-      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
+      return Problem.new("Username and password were not accepted. Please check them and try again.")
     end
 
     page = agent.get('http://mail.live.com/')

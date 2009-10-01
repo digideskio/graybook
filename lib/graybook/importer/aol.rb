@@ -11,7 +11,7 @@ class Graybook::Importer::Aol < Graybook::Importer::PageScraper
   def =~( options )
     options && options[:username] =~ /@(aol|aim)\.com$/i ? true : false
   end
-  
+
   ##
   # Login process:
   # - Get mail.aol.com which redirects to a page containing a javascript redirect
@@ -29,36 +29,36 @@ class Graybook::Importer::Aol < Graybook::Importer::PageScraper
 
     case page.body
     when /Invalid Screen Name or Password. Please try again./
-      raise( Graybook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." )
+      return Problem.new("Username and password were not accepted. Please check them and try again.")
     when /Terms of Service/
-      raise( Graybook::LegacyAccount, "Your AOL account is not setup for WebMail. Please signup: http://webmail.aol.com")
+      return Problem.new("Your AOL account is not setup for WebMail. Please signup: http://webmail.aol.com")
     end
 
     # aol bumps to a wait page while logging in.  if we can't scrape out the js then its a bad login
     extractor = proc { |var_name| page.body.scan(/var\s*#{var_name}\s*=\s*\"(.*?)\"\s*;/).first.first }
-      
+
     base_uri = extractor.call( 'gSuccessPath' )
-    raise( Graybook::BadCredentialsError, "You do not appear to be signed in." ) unless base_uri
+    return Problem.new("An error occurred. Please try again.") unless base_uri
     page = agent.get base_uri
   end
-  
+
   ##
   # must login to prepare
 
   def prepare
     login
   end
-  
+
   ##
   # The url to scrape contacts from has to be put together from the Auth cookie
   # and a known uri that hosts their contact service. An array of hashes with
   # :name and :email keys is returned.
 
-  def scrape_contacts    
+  def scrape_contacts
     unless auth_cookie = agent.cookies.find{|c| c.name =~ /^Auth/}
-      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
+      return Problem.new("An error occurred. Please try again.")
     end
-    
+
     # jump through the hoops of formulating a request to get printable contacts
     uri = agent.current_page.uri.dup
     inputs = agent.current_page.search("//input")
@@ -82,6 +82,6 @@ class Graybook::Importer::Aol < Graybook::Importer::PageScraper
       }
     end
   end
-  
+
   Graybook.register :aol, self
 end

@@ -60,8 +60,10 @@ class Graybook::Importer::PageScraper < Graybook::Importer::Base
 
   def fetch_contacts!
     create_agent
-    prepare
-    scrape_contacts
+    prep = prepare
+    return prep if prep.nil?
+    cont = scrape_contacts
+    return cont if cont.nil?
   end
   
   ##
