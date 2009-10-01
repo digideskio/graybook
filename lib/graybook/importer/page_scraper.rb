@@ -39,7 +39,7 @@ end
 ##
 # A base class for importers that scrape their contacts from web services
 
-class Blackbook::Importer::PageScraper < Blackbook::Importer::Base
+class Graybook::Importer::PageScraper < Graybook::Importer::Base
 
   attr_accessor :agent
   
@@ -49,7 +49,7 @@ class Blackbook::Importer::PageScraper < Blackbook::Importer::Base
 
   def create_agent
     self.agent = WWW::Mechanize.new
-    agent.user_agent = "Mozilla/4.0 (compatible; Blackbook #{Blackbook::VERSION})"
+    agent.user_agent = "Mozilla/4.0 (compatible; Graybook #{Graybook::VERSION})"
     agent.keep_alive = false
     agent
   end

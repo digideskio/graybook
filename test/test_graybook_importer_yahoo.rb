@@ -1,14 +1,14 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 
-class TestBlackbookImporterYahoo < Test::Unit::TestCase
+class TestGraybookImporterYahoo < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @importer = Blackbook::Importer::Yahoo.new
+    @importer = Graybook::Importer::Yahoo.new
     @importer.options = {:username => 'user@yahoo.com', :password => 'password'}
     @importer.create_agent
   end
@@ -56,7 +56,7 @@ class TestBlackbookImporterYahoo < Test::Unit::TestCase
     page = WWW::Mechanize::Page.new(uri=nil, response, body, code=nil, mech=nil)
     @importer.agent.expects(:submit).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.login
     end
   end
@@ -72,7 +72,7 @@ class TestBlackbookImporterYahoo < Test::Unit::TestCase
     page = WWW::Mechanize::Page.new(uri=nil, response, body, code=nil, mech=nil)
     @importer.agent.expects(:submit).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.login
     end
   end
@@ -84,7 +84,7 @@ class TestBlackbookImporterYahoo < Test::Unit::TestCase
     @importer.agent.expects(:get).with('http://address.yahoo.com/?1=&VPC=import_export'
       ).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.scrape_contacts
     end
   end

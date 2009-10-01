@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + '/lib/blackbook'
+require File.dirname(__FILE__) + '/lib/graybook'

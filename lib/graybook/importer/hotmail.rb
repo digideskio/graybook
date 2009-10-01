@@ -1,9 +1,9 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 require 'cgi'
 
 ##
 # imports contacts for MSN/Hotmail
-class Blackbook::Importer::Hotmail < Blackbook::Importer::PageScraper
+class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
 
   DOMAINS = { "compaq.net"        => "https://msnia.login.live.com/ppsecure/post.srf",
               "hotmail.co.jp"     => "https://login.live.com/ppsecure/post.srf",
@@ -51,7 +51,7 @@ class Blackbook::Importer::Hotmail < Blackbook::Importer::PageScraper
     # Check for login success
     if page.body =~ /The e-mail address or password is incorrect/ ||
       page.body =~ /Sign in failed\./
-      raise( Blackbook::BadCredentialsError, 
+      raise( Graybook::BadCredentialsError, 
         "That username and password was not accepted. Please check them and try again." )
     end
     
@@ -73,7 +73,7 @@ class Blackbook::Importer::Hotmail < Blackbook::Importer::PageScraper
 
   def scrape_contacts
     unless agent.cookies.find{|c| c.name == 'MSPPre' && c.value == options[:username]}
-      raise( Blackbook::BadCredentialsError, "Must be authenticated to access contacts." )
+      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
     end
 
     page = agent.get('http://mail.live.com/')
@@ -131,5 +131,5 @@ class Blackbook::Importer::Hotmail < Blackbook::Importer::PageScraper
     username.to_s.split('@').last
   end
   
-  Blackbook.register(:hotmail, self)
+  Graybook.register(:hotmail, self)
 end

@@ -1,9 +1,9 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
 ##
 # Imports contacts from GMail
 
-class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
+class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
 
   RETRY_THRESHOLD = 5
   ##
@@ -32,7 +32,7 @@ class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
     form.Passwd = options[:password]
     page = agent.submit(form,form.buttons.first)
     
-    raise( Blackbook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." ) if page.body =~ /Username and password do not match/
+    raise( Graybook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." ) if page.body =~ /Username and password do not match/
     
     if page.search('//meta').first.attributes['content'] =~ /url='?(http.+?)'?$/i
       page = agent.get $1
@@ -53,7 +53,7 @@ class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
     unless agent.cookies.find { |c| 
         c.name == 'GAUSR' && c.value.match(/mail(.*?):#{options[:username]}/) 
       }
-      raise( Blackbook::BadCredentialsError, "Must be authenticated to access contacts." )
+      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
     end
     
     page = agent.get('http://mail.google.com/mail/h/?v=cl&pnl=a')
@@ -80,5 +80,5 @@ class Blackbook::Importer::Gmail < Blackbook::Importer::PageScraper
     end.compact
   end
   
-  Blackbook.register(:gmail, self)
+  Graybook.register(:gmail, self)
 end

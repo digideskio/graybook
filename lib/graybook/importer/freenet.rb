@@ -1,6 +1,6 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
-class Blackbook::Importer::Freenet < Blackbook::Importer::PageScraper
+class Graybook::Importer::Freenet < Graybook::Importer::PageScraper
   LOGIN_URL = "https://office.freenet.de"
   MESSAGES_URL = "/main_overview.html"
 
@@ -25,10 +25,10 @@ class Blackbook::Importer::Freenet < Blackbook::Importer::PageScraper
       end
 
       if page.body.match(/Login (erneut )?fehlgeschlagen/) || page.body.match(/Ich bin bereits Mitglied/)
-        raise Blackbook::BadCredentialsError.new
+        raise Graybook::BadCredentialsError.new
       end
     rescue => e
-      raise e || Blackbook::BlackbookError.new
+      raise e || Graybook::GraybookError.new
     end
   end
 
@@ -58,5 +58,5 @@ class Blackbook::Importer::Freenet < Blackbook::Importer::PageScraper
       end
     end
 
-    Blackbook.register :freenet, self
+    Graybook.register :freenet, self
 end

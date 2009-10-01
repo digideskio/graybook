@@ -1,16 +1,16 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 require 'mechanize'
 
-class TestBlackbookImporterHotmail < Test::Unit::TestCase
+class TestGraybookImporterHotmail < Test::Unit::TestCase
 
   include TestHelper
 
   
   def setup
-    @importer = Blackbook::Importer::Hotmail.new
+    @importer = Graybook::Importer::Hotmail.new
     @importer.options = {:username => 'user@hotmail.com', :password => 'password'}
     @importer.create_agent
   end
@@ -27,7 +27,7 @@ class TestBlackbookImporterHotmail < Test::Unit::TestCase
     page = WWW::Mechanize::Page.new(uri=nil, response, body, code=nil, mech=nil)
     @importer.agent.expects(:submit).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.login
     end
 
@@ -58,7 +58,7 @@ class TestBlackbookImporterHotmail < Test::Unit::TestCase
 
   def test_scrape_contacts_not_logged_in
     @importer.agent.expects(:cookies).once.returns([])
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.scrape_contacts
     end
   end
@@ -146,7 +146,7 @@ class TestBlackbookImporterHotmail < Test::Unit::TestCase
     response = {'content-type' => 'text/html'}
     page = WWW::Mechanize::Page.new(URI.parse('http://localhost/'), response, '<html></html>', code=nil, mech=nil)
 
-    importer = Blackbook::Importer::Hotmail.new
+    importer = Graybook::Importer::Hotmail.new
     assert_nil importer.current_host
     importer.create_agent
     assert_nil importer.current_host
@@ -155,7 +155,7 @@ class TestBlackbookImporterHotmail < Test::Unit::TestCase
   end
 
   def test_username_domain(username = nil)
-    importer = Blackbook::Importer::Hotmail.new
+    importer = Graybook::Importer::Hotmail.new
     assert_nil importer.username_domain
     assert_equal 'example.com', importer.username_domain('user@example.com')
     assert_equal 'example.com', @importer.username_domain('user@example.com')

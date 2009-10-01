@@ -53,7 +53,7 @@ plugin_root = "#{ File.dirname(__FILE__) }/.."
 require 'rubygems'
 require 'mocha'
 
-module BlackbookExtensions
+module GraybookExtensions
   module TestHelper
     class Credentials
       attr_accessor :network, :config

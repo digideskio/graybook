@@ -1,14 +1,14 @@
-require File.join( File.dirname(__FILE__), '..', 'lib', 'blackbook.rb' )
+require File.join( File.dirname(__FILE__), '..', 'lib', 'graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 
-class TestBlackbookImporterPageScraper < Test::Unit::TestCase
+class TestGraybookImporterPageScraper < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @scraper = Blackbook::Importer::PageScraper.new
+    @scraper = Graybook::Importer::PageScraper.new
   end
 
   def test_mechanize_patch_to_absolute_uri
@@ -29,7 +29,7 @@ class TestBlackbookImporterPageScraper < Test::Unit::TestCase
     end
     assert_equal agent, @scraper.agent
     assert_equal true, agent.is_a?(WWW::Mechanize)
-    assert_equal "Mozilla/4.0 (compatible; Blackbook #{Blackbook::VERSION})", agent.user_agent
+    assert_equal "Mozilla/4.0 (compatible; Graybook #{Graybook::VERSION})", agent.user_agent
     assert_equal false, agent.keep_alive
   end
 

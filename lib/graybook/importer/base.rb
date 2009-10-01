@@ -1,7 +1,7 @@
 #
 # Provides a base template for interface and behavior of contact importers
 
-module Blackbook::Importer
+module Graybook::Importer
   class Base
     attr_accessor :options
 

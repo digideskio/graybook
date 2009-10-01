@@ -3,9 +3,9 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 context "The Freenet importer" do
 
   setup do
-    @username, @password = BlackbookExtensions::TestHelper::Credentials.new(:freenet).get
+    @username, @password = GraybookExtensions::TestHelper::Credentials.new(:freenet).get
 
-    @importer = Blackbook::Importer::Freenet.new
+    @importer = Graybook::Importer::Freenet.new
     @importer.create_agent
   end
 
@@ -26,13 +26,13 @@ context "The Freenet importer" do
   end
 
   specify "should raise BadCredentialsError on login with wrong credentials" do
-    should.raise Blackbook::BadCredentialsError do
+    should.raise Graybook::BadCredentialsError do
       login
     end
   end
 
   specify "should raise BadCredentialsError on login with correct username and wrong password" do
-    should.raise Blackbook::BadCredentialsError do
+    should.raise Graybook::BadCredentialsError do
       login(@username)
     end
   end

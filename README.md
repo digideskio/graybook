@@ -1,55 +1,49 @@
-Blackbook
-http://github.com/purzelrakete/blackbook/tree/master
+Graybook
 
-== DESCRIPTION:
+== Description:
   
-Blackbook automates the nitty-gritty of importing contacts from various services and files and exporting them as VCard, XML, or simple Hash. Utilize those contacts from services like AOL, GMail, Yahoo Mail, Hotmail or CSV to help your social networking site become GIGANTIC overnight! You'll be able to get big and sell for millions before anyone figures out it's just like every other social network.
+Pulls contact lists from EVERYWHERE! (Some sites not included.)
 
-== FEATURES/PROBLEMS:
+== Features:
   
 The current list of supported services and file types:
 
-Import:
-* AOL
-* CSV files
-* Gmail
-* Hotmail
-* Yahoo! Mail
+import:
+- AOL
+- CSV files
+- Gmail
+- Hotmail
+- Yahoo! Mail
 
-Export:
-* Simple hash (default)
-* Vcard
-* XML
+export:
+- Simple hash (default)
+- JSON (soon)
 
 If you create an additional importer or exporter - or simply find a bug - please consider submitting it as a patch to the project so the community can all benefit from your hard work and ingenuity. 
 
-== SYNOPSIS:
+== Synopsis:
 
 # An example of fetching Gmail contacts - by default, returns an array of hashes with :name and :email
-  contacts = Blackbook.get :username => 'me@gmail.com', :password => 'whatever'
+  contacts = Graybook.get :username => 'me@gmail.com', :password => 'whatever'
 
-# or returning XML
-  contacts = Blackbook.get :username => 'me@gmail.com', :password => 'whatever', :as => :xml
-  
-# or importing from a CSV file 
-  contacts = Blackbook.get :csv, :file => #<File:/path/to/file.csv>
-
-== REQUIREMENTS:
+== Requirements:
 
 * Mechanize and its dependencies, for interacting with online providers
 * Fastercsv for reading CSV, Mechanize >= 0.7.0 for page scraping
 
-== INSTALL:
+== Install:
 
-1. gem sources -a http://gems.github.com
-2. sudo gem install purzelrakete-blackbook
+1. gem install gemcutter
+1. gem tumble
+2. gem install graybook
 
-== THANKS:
+== Thanks:
 
-Big thanks to Marton Fabo for figuring out why Mechanize couldn't log in to AOL.
+Big thanks to Contentfree for making Blackbook.
 
-== LICENSE:
+== License:
 
+Copyright (c) 2009, kojul.com
 Copyright (c) 2007, Contentfree
 
 Permission is hereby granted, free of charge, to any person obtaining

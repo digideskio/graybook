@@ -2,13 +2,13 @@ $:.unshift File.expand_path(File.join(File.dirname(__FILE__)))
 require 'singleton'
 require 'rubygems'
 
-class Blackbook
+class Graybook
   include ::Singleton
-  VERSION = '1.0.5'
+  VERSION = '1.0.22'
   
-  class BlackbookError < ::StandardError; end
-  class BadCredentialsError < BlackbookError; end
-  class LegacyAccount < BlackbookError; end
+  class GraybookError < ::StandardError; end
+  class BadCredentialsError < GraybookError; end
+  class LegacyAccount < GraybookError; end
   
   attr_accessor :importers
   attr_accessor :exporters
@@ -40,7 +40,7 @@ class Blackbook
   end
   
   # Fetches contacts from various services or filetypes. The default is to return an array
-  # of hashes - Blackbook's internal format
+  # of hashes - Graybook's internal format
   # 
   # Handles several different calls:
   #  get( :username => 'something@gmail.com', :password => 'whatever' )
@@ -64,10 +64,10 @@ class Blackbook
 end
 
 # Require all the importers/exporters
-require 'blackbook/importer/base'
-require 'blackbook/exporter/base'
-Dir.glob(File.join(File.dirname(__FILE__), 'blackbook/importer/*.rb')).each {|f| require f }
-Dir.glob(File.join(File.dirname(__FILE__), 'blackbook/exporter/*.rb')).each {|f| require f }
+require 'graybook/importer/base'
+require 'graybook/exporter/base'
+Dir.glob(File.join(File.dirname(__FILE__), 'graybook/importer/*.rb')).each {|f| require f }
+Dir.glob(File.join(File.dirname(__FILE__), 'graybook/exporter/*.rb')).each {|f| require f }
 
 class NilClass
   def empty?

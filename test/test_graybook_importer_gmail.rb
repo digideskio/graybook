@@ -1,14 +1,14 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 
-class TestBlackbookImporterGmail < Test::Unit::TestCase
+class TestGraybookImporterGmail < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @importer = Blackbook::Importer::Gmail.new
+    @importer = Graybook::Importer::Gmail.new
     @importer.options = {:username => 'user@gmail.com', :password => 'password'}
     @importer.create_agent
   end
@@ -39,7 +39,7 @@ class TestBlackbookImporterGmail < Test::Unit::TestCase
     page = WWW::Mechanize::Page.new(uri=nil, response, body, code=nil, mech=nil)
     @importer.agent.expects(:submit).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.login
     end
   end
@@ -88,7 +88,7 @@ class TestBlackbookImporterGmail < Test::Unit::TestCase
 
   def test_scrape_contacts_raises_badcredentialerror_when_not_logged_in
     @importer.agent.expects(:cookies).once.returns([])
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.scrape_contacts
     end
   end

@@ -1,15 +1,15 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'tempfile'
 require 'test/unit'
 require 'mocha'
 
-class TestBlackbookImporterCsv < Test::Unit::TestCase
+class TestGraybookImporterCsv < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @importer = Blackbook::Importer::Csv.new
+    @importer = Graybook::Importer::Csv.new
   end
 
   def test_importer_match

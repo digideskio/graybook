@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'hoe'
 $LOAD_PATH.unshift 'lib'
-require 'blackbook'
+require 'gray'
 
 begin
   require 'rcov/rcovtask'
@@ -24,12 +24,12 @@ require 'rubygems'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name        = "blackbook"
+    s.name        = "graybook"
     s.summary     = "It does things. Like import contacts from EVERYWHERE."
-    s.email       = "bcardarella@gmail.com"
-    s.homepage    = "http://github.com/kojul/blackbook"
+    s.email       = "kojul@kojul.com"
+    s.homepage    = "http://github.com/kojul/gray"
     s.description = "It does things. Like import contacts from EVERYWHERE."
-    s.authors     = ["Rany Keddo", "Brian Cardarella"]
+    s.authors     = ["kojul"]
     s.add_dependency('hpricot', '>= 0.7.0')
     s.add_dependency('mechanize', '>= 0.7.0')
     s.add_dependency('hoe', '>= 1.5.0')

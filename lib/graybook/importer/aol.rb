@@ -1,9 +1,9 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
 ##
 # Imports contacts from AOL
 
-class Blackbook::Importer::Aol < Blackbook::Importer::PageScraper
+class Graybook::Importer::Aol < Graybook::Importer::PageScraper
 
   ##
   # Matches this importer to an user's name/address
@@ -29,16 +29,16 @@ class Blackbook::Importer::Aol < Blackbook::Importer::PageScraper
 
     case page.body
     when /Invalid Screen Name or Password. Please try again./
-      raise( Blackbook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." )
+      raise( Graybook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." )
     when /Terms of Service/
-      raise( Blackbook::LegacyAccount, "Your AOL account is not setup for WebMail. Please signup: http://webmail.aol.com")
+      raise( Graybook::LegacyAccount, "Your AOL account is not setup for WebMail. Please signup: http://webmail.aol.com")
     end
 
     # aol bumps to a wait page while logging in.  if we can't scrape out the js then its a bad login
     extractor = proc { |var_name| page.body.scan(/var\s*#{var_name}\s*=\s*\"(.*?)\"\s*;/).first.first }
       
     base_uri = extractor.call( 'gSuccessPath' )
-    raise( Blackbook::BadCredentialsError, "You do not appear to be signed in." ) unless base_uri
+    raise( Graybook::BadCredentialsError, "You do not appear to be signed in." ) unless base_uri
     page = agent.get base_uri
   end
   
@@ -56,7 +56,7 @@ class Blackbook::Importer::Aol < Blackbook::Importer::PageScraper
 
   def scrape_contacts    
     unless auth_cookie = agent.cookies.find{|c| c.name =~ /^Auth/}
-      raise( Blackbook::BadCredentialsError, "Must be authenticated to access contacts." )
+      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
     end
     
     # jump through the hoops of formulating a request to get printable contacts
@@ -83,5 +83,5 @@ class Blackbook::Importer::Aol < Blackbook::Importer::PageScraper
     end
   end
   
-  Blackbook.register :aol, self
+  Graybook.register :aol, self
 end

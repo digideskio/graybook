@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require File.join( File.dirname(__FILE__), '../../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../../lib/graybook.rb' )
 require 'optparse'
 
 options = {}
@@ -22,4 +22,4 @@ end
 
 opts.parse!(ARGV)
 
-puts contacts = Blackbook.get( importer, options )
+puts contacts = Graybook.get( importer, options )

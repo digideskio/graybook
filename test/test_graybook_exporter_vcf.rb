@@ -1,17 +1,17 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 
-class TestBlackbookExporterVcf < Test::Unit::TestCase
+class TestGraybookExporterVcf < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @card = Blackbook::Exporter::Vcf::Vcard.new(
+    @card = Graybook::Exporter::Vcf::Vcard.new(
              {'first' => 'joe', 'last' => 'user', 
               'email' => 'joe.user@example.com'})
-    @exporter = Blackbook::Exporter::Vcf.new
+    @exporter = Graybook::Exporter::Vcf.new
   end
 
   def test_vcard

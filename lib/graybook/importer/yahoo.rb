@@ -1,10 +1,10 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 require 'fastercsv'
 
 ##
 # contacts importer for Yahoo!
 
-class Blackbook::Importer::Yahoo < Blackbook::Importer::PageScraper
+class Graybook::Importer::Yahoo < Graybook::Importer::PageScraper
 
   ##
   # Matches this importer to an user's name/address
@@ -24,7 +24,7 @@ class Blackbook::Importer::Yahoo < Blackbook::Importer::PageScraper
     page = agent.submit(form, form.buttons.first)
     
     if page.body =~ /Invalid ID or password./ || page.body =~ /This ID is not yet taken./
-      raise Blackbook::BadCredentialsError, "That username and password was not accepted. Please check them and try again."
+      raise Graybook::BadCredentialsError, "That username and password was not accepted. Please check them and try again."
     end
     
     true
@@ -43,7 +43,7 @@ class Blackbook::Importer::Yahoo < Blackbook::Importer::PageScraper
   def scrape_contacts
     page = agent.get("http://address.yahoo.com/?1=&VPC=import_export")
     if page.body =~ /To access Yahoo! Address Book\.\.\..*Sign in./m
-      raise( Blackbook::BadCredentialsError, "Must be authenticated to access contacts." )
+      raise( Graybook::BadCredentialsError, "Must be authenticated to access contacts." )
     end
     form = page.forms.last
     csv = agent.submit(form, form.buttons[2]) # third button is Yahoo-format CSV
@@ -59,5 +59,5 @@ class Blackbook::Importer::Yahoo < Blackbook::Importer::PageScraper
     end
   end
   
-  Blackbook.register(:yahoo, self)
+  Graybook.register(:yahoo, self)
 end

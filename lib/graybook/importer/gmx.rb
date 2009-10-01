@@ -1,6 +1,6 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
-class Blackbook::Importer::GMX < Blackbook::Importer::PageScraper
+class Graybook::Importer::GMX < Graybook::Importer::PageScraper
   LOGIN_URL = "https://www.gmx.net/"
 
   def =~( options )
@@ -21,10 +21,10 @@ class Blackbook::Importer::GMX < Blackbook::Importer::PageScraper
 
       if (page.at("div.index") && page.at("div.index").inner_html == "Passwort vergessen?") ||
         page.uri.to_s.match(/login-failed/)
-        raise Blackbook::BadCredentialsError.new
+        raise Graybook::BadCredentialsError.new
       end
     rescue => e
-      raise e || Blackbook::BlackbookError.new
+      raise e || Graybook::GraybookError.new
     end
   end
 
@@ -64,5 +64,5 @@ class Blackbook::Importer::GMX < Blackbook::Importer::PageScraper
         { :name => fullname, :email => email }
       end
     end
-    Blackbook.register :gmx, self
+    Graybook.register :gmx, self
 end

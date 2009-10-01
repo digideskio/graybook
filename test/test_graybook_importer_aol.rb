@@ -1,16 +1,16 @@
-require File.join( File.dirname(__FILE__), '../lib/blackbook.rb' )
+require File.join( File.dirname(__FILE__), '../lib/graybook.rb' )
 require File.join( File.dirname(__FILE__), 'test_helper.rb' )
 require 'test/unit'
 require 'mocha'
 require 'mechanize'
 
 
-class TestBlackbookImporterAol < Test::Unit::TestCase
+class TestGraybookImporterAol < Test::Unit::TestCase
 
   include TestHelper
 
   def setup
-    @importer = Blackbook::Importer::Aol.new
+    @importer = Graybook::Importer::Aol.new
     @importer.options = {:username => 'user@aol.com', :password => 'password'}
     @importer.create_agent
   end
@@ -63,21 +63,21 @@ class TestBlackbookImporterAol < Test::Unit::TestCase
     page = WWW::Mechanize::Page.new(uri=nil, response, body, code=nil, mech=nil)
     @importer.agent.expects(:submit).once.returns(page)
 
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.login
     end
   end
 
   def test_scrape_contacts_raises_badcredentialerror_when_not_logged_in
     @importer.agent.expects(:cookies).once.returns([])
-    assert_raises(Blackbook::BadCredentialsError) do
+    assert_raises(Graybook::BadCredentialsError) do
       @importer.scrape_contacts
     end
   end
 
   def test_scrape_contacts
     cookie = WWW::Mechanize::Cookie.new('Auth',
-      'ver:7&uas:user%2cuser%2caim.com%2c0%2c0%2c0%2cAIM%2cen-us%2c2%2c633308135438559961%2c0%2c1%3b&un:user&at:SNS&sn:user&wim:djEgMVM%253D-Qg0R3W9DSOpFNfKRog8SxBigVbPg%252BDTtGsaBctTczECZruX82XONmIMGYsY%253D&sty:0&ud:aim.com&uid:blackbookuid&ss:633308135438559961&sst:1195234657&la:633308135438559961&lrid:25156&act:M&br:0&mbt:T&uv:AIM&lc:en-us&acd:315532800&pix:0&prmc:135925&relm:im&mah:&sah:&snh:ZDdhMTQ5YjlmZjQ5NTE5ZTFkYWI5OTU0ZDU1NWNlYTM%3d&miu:True&sit:sns.webmail.aol.com&ckd:.webmail.aol.com&ckp:%2f&ha:ABrytqN65h7Czwu0%2bDXlQGuc%2fQY%3d&')
+      'ver:7&uas:user%2cuser%2caim.com%2c0%2c0%2c0%2cAIM%2cen-us%2c2%2c633308135438559961%2c0%2c1%3b&un:user&at:SNS&sn:user&wim:djEgMVM%253D-Qg0R3W9DSOpFNfKRog8SxBigVbPg%252BDTtGsaBctTczECZruX82XONmIMGYsY%253D&sty:0&ud:aim.com&uid:graybookuid&ss:633308135438559961&sst:1195234657&la:633308135438559961&lrid:25156&act:M&br:0&mbt:T&uv:AIM&lc:en-us&acd:315532800&pix:0&prmc:135925&relm:im&mah:&sah:&snh:ZDdhMTQ5YjlmZjQ5NTE5ZTFkYWI5OTU0ZDU1NWNlYTM%3d&miu:True&sit:sns.webmail.aol.com&ckd:.webmail.aol.com&ckp:%2f&ha:ABrytqN65h7Czwu0%2bDXlQGuc%2fQY%3d&')
     cookie.domain = 'localhost'
     @importer.agent.expects(:cookies).once.returns([cookie])
 

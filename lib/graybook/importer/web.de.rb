@@ -1,6 +1,6 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
-class Blackbook::Importer::WebDE < Blackbook::Importer::PageScraper
+class Graybook::Importer::WebDE < Graybook::Importer::PageScraper
   LOGIN_URL = "https://freemail.web.de"
 
   def =~( options )
@@ -24,13 +24,13 @@ class Blackbook::Importer::WebDE < Blackbook::Importer::PageScraper
       end
 
       if page.uri.to_s.match(/logonfailed/)
-        raise Blackbook::BadCredentialsError.new
+        raise Graybook::BadCredentialsError.new
       end
 
       # follow content frame
       @next = agent.get page.frames[1].src
     rescue => e
-      raise e || Blackbook::BlackbookError.new
+      raise e || Graybook::GraybookError.new
     end
   end
 
@@ -63,5 +63,5 @@ class Blackbook::Importer::WebDE < Blackbook::Importer::PageScraper
       end
     end
 
-    Blackbook.register :webde, self
+    Graybook.register :webde, self
 end
