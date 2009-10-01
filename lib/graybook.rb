@@ -4,7 +4,7 @@ require 'rubygems'
 
 class Graybook
   include ::Singleton
-  VERSION = '1.0.24'
+  VERSION = '1.1.0'
 
   class Problem < Exception
     def nil?

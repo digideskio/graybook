@@ -1,5 +1,16 @@
-==1.0.24
+==1.1.0 / 2009-10-01
 
+ * Removed the completely outdates tests (will write new tests next patch)
+ * Restricted importers to the following:
+  * AOL/AIM
+  * Yahoo
+  * Hotmail/Live/MSN
+  * Google Mail
+ * Restricted exporters to just basic.
+ * Got rid of exception raising and instead implemented Problem, a child
+   of Exception that returns true on .nil? This is to pass error
+   messages back all the way through the .get function to whatever it
+   originated from (e.g. Rails).
  * Fixed Hotmail contact regexp to reflect new site.
 
 ==1.0.22 / 2009-09-30
