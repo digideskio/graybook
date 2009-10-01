@@ -33,11 +33,12 @@ class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
     form.Passwd = options[:password]
     page = agent.submit(form,form.buttons.first)
 
-    return Problem.new("Username and password were not accepted. Please check them and try again.") if page.body =~ /Username and password do not match/
+    return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.") if page.body =~ /Username and password do not match/
 
     if page.search('//meta').first.attributes['content'] =~ /url='?(http.+?)'?$/i
       page = agent.get $1
     end
+    true
   end
 
   ##
@@ -54,7 +55,7 @@ class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
     unless agent.cookies.find { |c|
         c.name == 'GAUSR' && c.value.match(/mail(.*?):#{options[:username]}/)
       }
-      return Problem.new("Username and password were not accepted. Please check them and try again.")
+      return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.")
     end
 
     page = agent.get('http://mail.google.com/mail/h/?v=cl&pnl=a')

@@ -24,7 +24,7 @@ class Graybook::Importer::Yahoo < Graybook::Importer::PageScraper
     page = agent.submit(form, form.buttons.first)
 
     if page.body =~ /Invalid ID or password./ || page.body =~ /This ID is not yet taken./
-      return Problem.new("Username and password were not accepted. Please check them and try again.")
+      return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.")
     end
 
     true
@@ -43,7 +43,7 @@ class Graybook::Importer::Yahoo < Graybook::Importer::PageScraper
   def scrape_contacts
     page = agent.get("http://address.yahoo.com/?1=&VPC=import_export")
     if page.body =~ /To access Yahoo! Address Book\.\.\..*Sign in./m
-      return Problem.new("Username and password were not accepted. Please check them and try again.")
+      return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.")
     end
     form = page.forms.last
     csv = agent.submit(form, form.buttons[2]) # third button is Yahoo-format CSV

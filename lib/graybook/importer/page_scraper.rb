@@ -62,8 +62,7 @@ class Graybook::Importer::PageScraper < Graybook::Importer::Base
     create_agent
     prep = prepare
     return prep if prep.nil?
-    cont = scrape_contacts
-    return cont if cont.nil?
+    scrape_contacts
   end
   
   ##

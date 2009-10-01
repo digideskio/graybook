@@ -51,10 +51,11 @@ class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
     # Check for login success
     if page.body =~ /The e-mail address or password is incorrect/ ||
       page.body =~ /Sign in failed\./
-      return Problem.new("Username and password were not accepted. Please check them and try again.")
+      return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.")
     end
     
     @first_page = agent.get( page.body.scan(/http\:\/\/[^"]+/).first )
+    true
   end
   
   ##
@@ -71,7 +72,7 @@ class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
 
   def scrape_contacts
     unless agent.cookies.find{|c| c.name == 'MSPPre' && c.value == options[:username]}
-      return Problem.new("Username and password were not accepted. Please check them and try again.")
+      return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.")
     end
 
     page = agent.get('http://mail.live.com/')
