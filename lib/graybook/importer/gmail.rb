@@ -1,4 +1,5 @@
 require 'graybook/importer/page_scraper'
+require 'hpricot'
 
 ##
 # Imports contacts from GMail

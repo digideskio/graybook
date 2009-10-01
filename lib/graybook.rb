@@ -4,7 +4,7 @@ require 'rubygems'
 
 class Graybook
   include ::Singleton
-  VERSION = '1.0.22'
+  VERSION = '1.0.23'
   
   class GraybookError < ::StandardError; end
   class BadCredentialsError < GraybookError; end

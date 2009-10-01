@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'hoe'
 $LOAD_PATH.unshift 'lib'
-require 'gray'
+require 'graybook'
 
 begin
   require 'rcov/rcovtask'

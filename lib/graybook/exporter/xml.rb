@@ -3,7 +3,7 @@ require 'rexml/document'
 ##
 # exports contacts in xml format
 
-class Blackbook::Exporter::Xml < Blackbook::Exporter::Base
+class Graybook::Exporter::Xml < Graybook::Exporter::Base
 
   ##
   # contacts are an array of hashes that are contacts and returns xml
@@ -24,5 +24,5 @@ class Blackbook::Exporter::Xml < Blackbook::Exporter::Base
     doc.to_s
   end
   
-  Blackbook.register(:xml, self)
+  Graybook.register(:xml, self)
 end

@@ -1,6 +1,6 @@
 ##
 # exports contacts in Vcard format
-class Blackbook::Exporter::Vcf < Blackbook::Exporter::Base
+class Graybook::Exporter::Vcf < Graybook::Exporter::Base
 
   ##
   # representation of a vcard
@@ -41,5 +41,5 @@ END:VCARD
     end
   end
   
-  Blackbook.register(:vcf, self)
+  Graybook.register(:vcf, self)
 end

@@ -98,7 +98,7 @@ class Graybook::Importer::Hotmail < Graybook::Importer::PageScraper
   end
   
   def parse_contacts(source)
-    source.scan(/ICc.*\:\[.*?,.*?,\['ct'\],'(.*?)',.*?,.*?,'(.*?)',.*\]/).collect do |name, email|
+    source.scan(/ICc.*\:\[.*?,.*?,\['se','ct'\],'(.*?)',.*?,.*?,'(.*?)',.*\]/).collect do |name, email|
       { :name => (name =~ /\\x26\\x2364\\x3b/ ? nil : name), :email => email.gsub(/\\x40/, '@') }
     end
   end

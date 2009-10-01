@@ -1,16 +1,16 @@
 ##
 # base class for exporters of contact information
 
-module Blackbook::Exporter
+module Graybook::Exporter
 
   class Base
     ##
     # Override this to convert +contacts+ (an array of hashes) to something more useful. Here, it
-    # just returns Blackbook's internal format
+    # just returns Graybook's internal format
     def export( contacts )
       contacts
     end
     
-    Blackbook.register :basic, self
+    Graybook.register :basic, self
   end
 end
