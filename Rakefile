@@ -15,6 +15,7 @@ begin
     s.authors     = ["kojul", "Contentfree"]
     s.add_dependency('hpricot', '>= 0.7.0')
     s.add_dependency('mechanize', '>= 0.7.0')
+    s.add_dependency('fastercsv', '>= 1.2.0')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
