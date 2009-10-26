@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{graybook}
-  s.version = "1.1.1"
+  s.version = "1.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["kojul", "Contentfree"]
-  s.date = %q{2009-10-01}
+  s.date = %q{2009-10-26}
   s.description = %q{Graybook is used to import email contact lists from popular webmail sites. Currently supported are AOL/AIM, Yahoo, Hotmail/Live/MSN, and Google Mail (although not Google Apps Mail yet).}
   s.email = %q{kojul@kojul.com}
   s.extra_rdoc_files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "CHANGELOG",
-     "Manifest.txt",
      "README",
      "Rakefile",
      "VERSION",
@@ -48,12 +47,15 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<hpricot>, [">= 0.7.0"])
       s.add_runtime_dependency(%q<mechanize>, [">= 0.7.0"])
+      s.add_runtime_dependency(%q<fastercsv>, [">= 1.2.0"])
     else
       s.add_dependency(%q<hpricot>, [">= 0.7.0"])
       s.add_dependency(%q<mechanize>, [">= 0.7.0"])
+      s.add_dependency(%q<fastercsv>, [">= 1.2.0"])
     end
   else
     s.add_dependency(%q<hpricot>, [">= 0.7.0"])
     s.add_dependency(%q<mechanize>, [">= 0.7.0"])
+    s.add_dependency(%q<fastercsv>, [">= 1.2.0"])
   end
 end
