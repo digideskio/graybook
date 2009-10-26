@@ -54,6 +54,7 @@ Requirements:
 -------------
 
 * Mechanize >= 0.7.0 for page scraping
+* FasterCSV >= 1.2.0 for Yahoo CSV format parsing
 
 Install:
 --------
