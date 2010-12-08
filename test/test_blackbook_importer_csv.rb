@@ -57,4 +57,26 @@ class TestBlackbookImporterCsv < Test::Unit::TestCase
     assert_equal expected, @importer.fetch_contacts!
   end
 
+  def test_to_columns_thunderbird
+    assert_equal [:"First Name",:"Last Name",:name], @importer.to_columns('First Name,Last Name,Display Name')
+    assert_equal [:email,:email,:email,:email], @importer.to_columns('E-mail,Email,Primary Email,E-mail Address')
+    assert_equal [:"First Name",:"Last Name",:name,:email], @importer.to_columns('First Name,Last Name,Display Name,Primary Email')
+  end
+
+  def test_fetch_contacts_with_column_names_thunderbird
+    file = mock(:path => '/tmp/test.csv')
+    options = {:file => file}
+    @importer.instance_variable_set(:@options, options)
+    IO.expects(:readlines).with('/tmp/test.csv').
+      once.returns(['First Name,Last Name,Display Name,Nickname,Primary Email',
+                    ',,Joe Paterno,joepa,joepa@pennstate.com',
+                    'Sam,Brooks,Sam Brooks,,sam@brooks.com'])
+    expected = [{:name => 'Joe Paterno', :email => 'joepa@pennstate.com', :Nickname => "joepa",
+                :"First Name" => "", :"Last Name" => ""},
+                {:name => 'Sam Brooks', :"First Name" => "Sam", :"Last Name" => "Brooks",
+                  :email => 'sam@brooks.com', :Nickname => ""}]
+    assert_equal expected, @importer.fetch_contacts!
+  end
+
+  
 end
