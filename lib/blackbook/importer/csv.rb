@@ -55,7 +55,7 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
         columns << :name
       elsif v =~ /^e.?mail/i or v =~ /^E.?mail Address$/i or v =~ /^Primary Email$/i
         columns << :email
-      else
+      elsif !v.strip.blank?
         columns << v.strip.to_sym
       end
     end
