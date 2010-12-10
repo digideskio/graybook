@@ -56,7 +56,7 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
       # match outlook, outlook express, or thunderbird
       if v =~ /^name$/i or v =~ /^Display Name$/i
         columns << :name
-      elsif v =~ /^e.?mail/i or v =~ /^E.?mail Address$/i or v =~ /^Primary Email$/i
+      elsif v =~ /^e.?mail$/i or v =~ /^E.?mail Address$/i or v =~ /^Primary Email$/i
         columns << :email
       elsif !v.strip.empty?
         columns << v.strip.to_sym
