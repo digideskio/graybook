@@ -41,7 +41,10 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
   def to_hash(cols, vals) # :nodoc:
     h = Hash.new
     cols.each do |c|
-      h[c] = (c == cols.last) ? vals.join(',') : vals.shift
+      h[c] = (c == cols.last) ? vals.join(',') : vals.shift      
+    end
+    if h[:name].nil? && !(h[:"First Name"].nil? || h[:"Last Name"].nil?)
+      h[:name] = "#{h[:'First Name']} #{h[:'Last Name']}".strip
     end
     h
   end
@@ -55,7 +58,7 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
         columns << :name
       elsif v =~ /^e.?mail/i or v =~ /^E.?mail Address$/i or v =~ /^Primary Email$/i
         columns << :email
-      elsif !v.strip.blank?
+      elsif !v.strip.empty?
         columns << v.strip.to_sym
       end
     end

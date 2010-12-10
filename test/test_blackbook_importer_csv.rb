@@ -78,5 +78,20 @@ class TestBlackbookImporterCsv < Test::Unit::TestCase
     assert_equal expected, @importer.fetch_contacts!
   end
 
+  def test_fetch_contacts_with_column_names_outlook
+    file = mock(:path => '/tmp/test.csv')
+    options = {:file => file}
+    @importer.instance_variable_set(:@options, options)
+    IO.expects(:readlines).with('/tmp/test.csv').
+      once.returns(['First Name,Last Name,E-mail Address',
+                    'Joe,Paterno,joepa@pennstate.com',
+                    'Sam Brooks,,sam@brooks.com'])
+    expected = [{:name => 'Joe Paterno', :email => 'joepa@pennstate.com',
+                :"First Name" => "Joe", :"Last Name" => "Paterno"},
+                {:name => 'Sam Brooks', :"First Name" => "Sam Brooks", :"Last Name" => "",
+                  :email => 'sam@brooks.com'}]
+    assert_equal expected, @importer.fetch_contacts!
+  end
+
   
 end
