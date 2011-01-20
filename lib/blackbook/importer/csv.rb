@@ -59,7 +59,7 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
       elsif v =~ /^e.?mail$/i or v =~ /^E.?mail Address$/i or v =~ /^Primary Email$/i
         columns << :email
       elsif !v.strip.empty?
-        columns << v.strip.to_sym
+        columns << v.strip.gsub("\0", "").to_sym
       end
     end
     columns
