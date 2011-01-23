@@ -14,15 +14,6 @@ class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
     options && options[:username] =~ /@(gmail|googlemail).com$/i ? true : false
   end
 
-  def import(*args)
-    # GMail depends on Hpricot for some reason...
-    parser = Mechanize.html_parser
-    Mechanize.html_parser = Hpricot
-    return super do
-      Mechanize.html_parser = parser
-    end
-  end
-
   ##
   # login to gmail
 
