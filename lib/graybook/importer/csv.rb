@@ -3,7 +3,7 @@ require 'fastercsv'
 ##
 # Imports contacts from a CSV file
 
-class Blackbook::Importer::Csv < Blackbook::Importer::Base
+class Graybook::Importer::Csv < Graybook::Importer::Base
 
   DEFAULT_COLUMNS = [:name,:email,:misc]
 
@@ -65,5 +65,5 @@ class Blackbook::Importer::Csv < Blackbook::Importer::Base
     columns
   end
 
-  Blackbook.register(:csv, self)
+  Graybook.register(:csv, self)
 end

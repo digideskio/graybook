@@ -1,8 +1,8 @@
-require 'blackbook/importer/page_scraper'
+require 'graybook/importer/page_scraper'
 
 # Imports contacts from Myspace 
 
-class Blackbook::Importer::Myspace < Blackbook::Importer::PageScraper
+class Graybook::Importer::Myspace < Graybook::Importer::PageScraper
 
   def login
     page = agent.get('http://www.myspace.com/')
@@ -12,7 +12,7 @@ class Blackbook::Importer::Myspace < Blackbook::Importer::PageScraper
     page = agent.submit(form,form.buttons.first)
 
     # Check if redirected to homepage 
-    raise( Blackbook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." ) if page.uri.to_s!='http://home.myspace.com/index.cfm?fuseaction=home'
+    raise( Graybook::BadCredentialsError, "That username and password was not accepted. Please check them and try again." ) if page.uri.to_s!='http://home.myspace.com/index.cfm?fuseaction=home'
   end
 
  
@@ -36,7 +36,7 @@ class Blackbook::Importer::Myspace < Blackbook::Importer::PageScraper
 
     page = agent.post("http://messaging.myspace.com/Modules/Invites/Services/AddressBookService.asmx/GetAddresBookContacts","{'hash':'#{page_hash}', 'jsonParams':{'pageOffset':0, 'fetchLimit':2000}}", 'Content-Type' => 'application/json; charset=utf-8')
 
-    json = Blackbook.json_decode(page.body)
+    json = Graybook.json_decode(page.body)
 
     json["Data"]["items"].each do |c|
       contacts << {:name => c['name']['contactFullName'], 
@@ -48,6 +48,6 @@ class Blackbook::Importer::Myspace < Blackbook::Importer::PageScraper
   end
 
   # Register Myspace with blackbook
-  Blackbook.register(:myspace, self)
+  Graybook.register(:myspace, self)
 
 end
