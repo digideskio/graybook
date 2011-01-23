@@ -16,10 +16,10 @@ class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
 
   def import(*args)
     # GMail depends on Hpricot for some reason...
-    parser = WWW::Mechanize.html_parser
-    WWW::Mechanize.html_parser = Hpricot
+    parser = Mechanize.html_parser
+    Mechanize.html_parser = Hpricot
     return super do
-      WWW::Mechanize.html_parser = parser
+      Mechanize.html_parser = parser
     end
   end
 

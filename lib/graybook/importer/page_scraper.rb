@@ -4,7 +4,7 @@ require 'mechanize'
 require 'generator' # for SyncEnumerator
 
 # Patch Mechanize's broken html unescaping Mechanize 0.6.11
-class WWW::Mechanize
+class Mechanize
   def to_absolute_uri(url, cur_page=current_page())
     unless url.is_a? URI
       url = url.to_s.strip
@@ -48,7 +48,7 @@ class Graybook::Importer::PageScraper < Graybook::Importer::Base
   # user agent header for good net educate 
 
   def create_agent
-    self.agent = WWW::Mechanize.new
+    self.agent = Mechanize.new
     agent.user_agent = "Mozilla/4.0 (compatible; Graybook #{Graybook::VERSION})"
     agent.keep_alive = false
     agent
