@@ -1,95 +1,11 @@
-                   ,-------------------------, 
-                   |                         |,
-                   (=========================||
-                   (=========================||
-                   (=========================||
-                   |  __,  ,_    __,         ||
-                   | /  | /  |  /  |  |   |  ||
-                   | \_/|/   |_/\_/|_/ \_/|/ ||
-                   |   /|                /|  ||
-                   |   \|                \|  ||
-                   |     _              _    ||
-                   |    | |            | |   ||
-                   |    | |   __   __  | |   ||
-                   |    |/ \_/  \_/  \_|/_)  ||
-                   |     \_/ \__/ \__/ | \_/ ||
-                   (=========================||
-                   (=========================||
-                   (=========================||
-                   |                         ||
-                   |_________________________'|
-                    '-------------------------'
+Blackbook and Graybook are in various states of broken. This is my attempt to get things working on the site that we're running.
 
-Description:
-------------
-  
-Pulls contact lists from EVERYWHERE! (Some sites not included.)
-Originally based on Blackbook, but heavily modified and simplified.
+Current state of affairs:
 
-Features:
----------
-  
-The current list of supported services and file types:
+CSV - works, reads from Thunderbird and Outlook formats at least.
+GMail - works
 
-Services:
-  - AOL/AIM
-  - Yahoo
-  - Hotmail/Live/MSN
-  - Google Mail
+Yahoo - ???
+AOL - ???
 
-Synopsis:
----------
-
-Returns an array of hashes containing a name key and an email key can
-be used as is oreasily be converted into a JSON that can be iterated
-though.
-
->> contacts = Graybook.get :service,
-                :username => 'username@service.com',
-                :password => 'supersecret'
-=> [{:name => 'john doe', :email => 'male@unknown.com'},
-    {:named => 'jane doe', :email => 'female@unknown.com'}]
-
-Requirements:
--------------
-
-* Mechanize >= 0.7.0 for page scraping
-* FasterCSV >= 1.2.0 for Yahoo CSV format parsing
-
-Install:
---------
-
-1. gem install gemcutter
-1. gem tumble
-2. gem install graybook
-
-Thanks:
--------
-
-Big thanks to the peoples of Contentfree for making Blackbook.
-More thanks to everyone else who maintained working forks of Blackbook.
-
-License:
---------
-
-Copyright (c) 2009, kojul.com
-Copyright (c) 2007, Contentfree
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Hotmail - doesn't work
