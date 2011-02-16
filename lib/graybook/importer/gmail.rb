@@ -26,6 +26,13 @@ class Graybook::Importer::Gmail < Graybook::Importer::PageScraper
 
     return Graybook::Problem.new("Username and password were not accepted. Please check them and try again.") if page.body =~ /Username and password do not match/
 
+    if page.search('//meta').first.nil?
+      if request.try(:env)
+        request.env["exception_notifier.exception_data"]["graybook-page"] = page.body
+      end
+      return Graybook::Problem.new("We're sorry, something went wrong while looking for your contacts. Please try again later!")
+    end
+    
     if page.search('//meta').first.attributes['content'] =~ /url='?(http.+?)'?$/i
       page = agent.get $1
     end
